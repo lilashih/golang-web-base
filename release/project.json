@@ -1,0 +1,8 @@
+{
+  "title": "golang_app",
+  "type": "exe",
+  "key": "app",
+  "start": "start /b app.exe",
+  "stop": "taskkill /IM app.exe /F",
+  "install": ""
+}

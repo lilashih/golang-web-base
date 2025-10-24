@@ -1,0 +1,132 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.el-container {
+    height: 100vh;
+}
+
+/* 左側菜單start */
+:root {
+    --el-menu-bg-color: #343a40;
+    --el-menu-border-color: #343a40;
+    --el-menu-text-color: white;
+    --el-menu-hover-bg-color: rgba(255, 255, 255, 0.1);
+    --el-menu-active-color: #343a40;
+    --el-menu-level-padding: 20px;
+    --el-menu-item-height: 50px;
+    --el-menu-sub-item-height: calc(var(--el-menu-item-height) - 10px);
+    --el-menu-base-level-padding: 10px;
+
+    --loading-text-color: white;
+}
+.menu-aside {
+    background-color: var(--el-menu-bg-color);
+    color: var(--el-menu-text-color);
+    overflow: auto;
+    transition: width 0.3s ease;
+    width: 200px;
+}
+.menu-aside a {
+    text-decoration: none;
+}
+.menu-aside.collapsed {
+    width: 64px;
+}
+.menu-collapse {
+    border-bottom: 1px solid #4b545c;
+}
+.el-menu-item.is-active {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: calc(250px - 0.5rem * 2);
+}
+.el-menu-item-group__title {
+    padding: 0px;
+}
+.el-menu--collapse .el-sub-menu.is-active .el-sub-menu__title {
+    color: white;
+}
+.el-menu .el-icon {
+    margin-right: 10px;
+}
+/* 左側菜單end */
+
+.el-header {
+    height: var(--el-menu-item-height);
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #dee2e6;
+}
+.el-header h1 {
+    margin-top: 5px;
+    vertical-align: middle;
+    font-size: 1.5em;
+}
+
+.content {
+    padding: 20px;
+    overflow: auto;
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+}
+
+/* loading */
+.el-loading-spinner .path {
+    stroke: var(--loading-text-color);
+}
+.el-loading-spinner .el-loading-text {
+    color: var(--loading-text-color);
+    font-size: 20px;
+}
+/* loading end */
+
+/* notification */
+.notification-success {
+    background-color: var(--el-color-success-light-9);
+}
+.notification-success .el-notification__title {
+    color: var(--el-color-success-dark-2);
+}
+.notification-error {
+    background-color: var(--el-color-error-light-9);
+}
+.notification-error .el-notification__title {
+    color: var(--el-color-error-dark-2);
+}
+.notification-warning {
+    background-color: var(--el-color-warning-light-9);
+}
+.notification-warning .el-notification__title {
+    color: var(--el-color-warning-dark-2);
+}
+.notification-info {
+    background-color: var(--el-color-info-light-9);
+}
+.notification-info .el-notification__title {
+    color: var(--el-color-info-dark-2);
+}
+/* notification end */
+
+.pagination-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px; /* 可根據需要調整間距 */
+}
+
+.setting-btn-group{
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.tooltip-inner {
+    white-space: pre-wrap;
+}
+
+.el-button.is-circle.order-btn{
+    width: 25px;
+    height: 25px;
+}

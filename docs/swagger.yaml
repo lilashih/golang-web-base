@@ -1,0 +1,556 @@
+definitions:
+  ConfigsResource:
+    properties:
+      configs:
+        additionalProperties:
+          type: string
+        type: object
+    type: object
+  ErrorBag:
+    properties:
+      message:
+        description: 錯誤訊息
+        example: 為必填欄位
+        type: string
+      name:
+        description: 錯誤欄位名稱
+        example: code
+        type: string
+    type: object
+  ErrorValidationResource:
+    properties:
+      errors:
+        items:
+          $ref: '#/definitions/ErrorBag'
+        type: array
+    type: object
+  Menu:
+    properties:
+      children:
+        description: 子群組項目
+        items:
+          $ref: '#/definitions/Permission'
+        type: array
+      group:
+        description: 菜單主群組名稱
+        example: 菜單
+        type: string
+      order:
+        description: 菜單主群組排序
+        example: 1
+        type: integer
+    type: object
+  OrderInput:
+    properties:
+      id1:
+        description: 第一筆資料id
+        example: "1"
+        type: string
+      id2:
+        description: 第二筆資料id
+        example: "2"
+        type: string
+    required:
+    - id1
+    - id2
+    type: object
+  Pagination:
+    properties:
+      currentPage:
+        description: 當前頁數
+        type: integer
+      lastPage:
+        description: 最後一頁的頁數
+        type: integer
+      perPage:
+        description: 每頁的資筆數
+        type: integer
+      total:
+        description: 資料總筆數
+        type: integer
+    type: object
+  Permission:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        description: 名稱
+        example: 基本資料
+        type: string
+      order:
+        description: 子群組排序
+        type: integer
+      path:
+        description: API路徑
+        type: string
+      system:
+        description: 權限所屬系統
+        example: app
+        type: string
+    type: object
+  Response:
+    properties:
+      code:
+        description: 跟http code一樣
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  Setting:
+    properties:
+      createdAt:
+        description: 新增時間
+        type: string
+      group:
+        description: 群組
+        type: string
+      id:
+        type: string
+      isEditable:
+        type: boolean
+      isViewable:
+        type: boolean
+      name:
+        description: 名稱
+        type: string
+      option:
+        description: 表單選項，為陣列或object
+      order:
+        description: 排序
+        type: integer
+      type:
+        description: 表單類型
+        type: string
+      updatedAt:
+        description: 編輯時間
+        type: string
+      value:
+        description: 設定值
+        type: string
+    type: object
+  SettingResource:
+    properties:
+      setting:
+        $ref: '#/definitions/Setting'
+    type: object
+  SettingsResource:
+    properties:
+      settings:
+        items:
+          $ref: '#/definitions/Setting'
+        type: array
+    type: object
+  User:
+    properties:
+      createdAt:
+        description: 新增時間
+        type: string
+      id:
+        description: ID
+        type: integer
+      isDeleted:
+        description: 是否被軟刪，0：未刪除、1：已刪除
+        example: false
+        type: boolean
+      name:
+        description: User name
+        example: Tom
+        maxLength: 300
+        type: string
+      order:
+        description: 排序
+        type: integer
+      updatedAt:
+        description: 編輯時間
+        type: string
+    required:
+    - name
+    type: object
+  UserInput:
+    properties:
+      name:
+        description: User name
+        example: Tom
+        maxLength: 300
+        type: string
+    required:
+    - name
+    type: object
+  UserResource:
+    properties:
+      user:
+        $ref: '#/definitions/User'
+    type: object
+  UsersResource:
+    properties:
+      pagination:
+        $ref: '#/definitions/Pagination'
+      users:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+    type: object
+  model.SettingInput:
+    properties:
+      id:
+        description: 設定ID
+        example: ip
+        type: string
+      value:
+        description: 設定值
+        example: 192.1.1.1
+        type: string
+    required:
+    - id
+    type: object
+  resource.Menus:
+    properties:
+      menus:
+        items:
+          $ref: '#/definitions/Menu'
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /app/configs:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/ConfigsResource'
+              type: object
+      summary: 獲取系統配置
+      tags:
+      - 系統配置
+  /menus:
+    get:
+      consumes:
+      - application/json
+      description: 獲取系統菜單，依權限回傳可存取的菜單
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/resource.Menus'
+              type: object
+      summary: 獲取菜單
+      tags:
+      - Menu 菜單
+  /settings:
+    get:
+      consumes:
+      - application/json
+      description: 獲取系統設定，依權限回傳可存取的設定
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/SettingsResource'
+              type: object
+      summary: 獲取設定
+      tags:
+      - Setting 設定
+  /settings/{group}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群組
+        in: path
+        name: group
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/SettingsResource'
+              type: object
+      summary: 獲取設定資訊
+      tags:
+      - Setting 設定
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群組
+        in: path
+        name: group
+        required: true
+        type: string
+      - description: 設定資訊
+        in: body
+        name: data
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/model.SettingInput'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200, message:編輯成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/SettingResource'
+              type: object
+        "400":
+          description: code:400, message:編輯失敗
+          schema:
+            $ref: '#/definitions/Response'
+        "404":
+          description: code:404, message:查無該資料
+          schema:
+            $ref: '#/definitions/Response'
+        "422":
+          description: code:422 (表單資料有誤)
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/ErrorValidationResource'
+              type: object
+      summary: 編輯設定
+      tags:
+      - Setting 設定
+  /users:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 資料頁數
+        in: query
+        name: page
+        type: integer
+      - default: 100
+        description: 資料限制，最大值為100
+        in: query
+        name: perPage
+        type: integer
+      - description: 搜尋名稱
+        in: query
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/UsersResource'
+              type: object
+      summary: 獲取使用者列表
+      tags:
+      - User 使用者
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 使用者資訊
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/UserInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200, message:新增成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/UserResource'
+              type: object
+        "400":
+          description: code:400, message:新增失敗
+          schema:
+            $ref: '#/definitions/Response'
+        "422":
+          description: code:422 (表單資料有誤)
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/ErrorValidationResource'
+              type: object
+      summary: 新增使用者
+      tags:
+      - User 使用者
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200, message:刪除成功
+          schema:
+            $ref: '#/definitions/Response'
+        "400":
+          description: code:400, message:刪除失敗
+          schema:
+            $ref: '#/definitions/Response'
+        "404":
+          description: code:404, message:查無該資料
+          schema:
+            $ref: '#/definitions/Response'
+      summary: 刪除使用者
+      tags:
+      - User 使用者
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/UserResource'
+              type: object
+        "404":
+          description: code:404, message:查無該資料
+          schema:
+            $ref: '#/definitions/Response'
+      summary: 獲取使用者資訊
+      tags:
+      - User 使用者
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 使用者資訊
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/UserInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200, message:編輯成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/UserResource'
+              type: object
+        "400":
+          description: code:400, message:編輯失敗
+          schema:
+            $ref: '#/definitions/Response'
+        "404":
+          description: code:404, message:查無該資料
+          schema:
+            $ref: '#/definitions/Response'
+        "422":
+          description: code:422 (表單資料有誤)
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/ErrorValidationResource'
+              type: object
+      summary: 編輯使用者
+      tags:
+      - User 使用者
+  /users/order:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 要交換順序的兩筆資料id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/OrderInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200, message:編輯成功
+          schema:
+            $ref: '#/definitions/Response'
+        "400":
+          description: code:400, message:編輯失敗
+          schema:
+            $ref: '#/definitions/Response'
+        "404":
+          description: code:404, message:查無該資料
+          schema:
+            $ref: '#/definitions/Response'
+      summary: 修改使用者排序
+      tags:
+      - User 使用者
+swagger: "2.0"
