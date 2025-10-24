@@ -7,7 +7,7 @@ This project is a `Golang` web application based on `Gin`, including both fronte
 ## Installation
 1. Create environment config file
     ```
-    cp .env.example .env
+    cp .env.dev .env
     ```
 
 2. Install dependencies and run

@@ -7,7 +7,7 @@
 ## 初次安裝
 1. 建立環境設定檔
     ```
-    cp .env.example .env
+    cp .env.dev .env
     ```
 
 2. 安裝相依套件並執行
