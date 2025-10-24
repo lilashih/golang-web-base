@@ -1,10 +1,10 @@
 # Golang Web Base (Gin)
 
-## Features
+## ▍Features
 This project is a `Golang` web application based on `Gin`, including both frontend and backend. Below are common commands. For detailed development docs, see the [documentation](/docs/document/).
 
 
-## Installation
+## ▍Installation
 1. Create environment config file
     ```
     cp .env.dev .env
@@ -17,8 +17,7 @@ This project is a `Golang` web application based on `Gin`, including both fronte
     go run main.go
     ```
 
-## Development
-### Start the server
+## ▍Start the server
 - Run:
     ```
     go run main.go
@@ -34,12 +33,12 @@ This project is a `Golang` web application based on `Gin`, including both fronte
         air
         ```
 
-## Migrate
+## ▍Migrate
 ```
 go run main.go migrate
 ```
 
-## Swagger 
+## ▍Swagger 
 1. Install [gin-swagger](https://github.com/swaggo/gin-swagger)
 
 2. Regenerate `API` docs
@@ -48,13 +47,13 @@ go run main.go migrate
     ```
 
 
-## Testing
+## ▍Testing
 Place test files directly under the `test` directory (do not create subdirectories), then run:
 ```
 go test -v ./test/...
 ```
 
-## Build
+## ▍Build
 ### Windows
 - Regular build
     ```
