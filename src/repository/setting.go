@@ -39,7 +39,7 @@ func (r SettingRepository) FindAll(search map[string]string) (interface{}, resou
 		}
 	}
 
-	err := db.Order("`group`, `order` DESC").Find(&out).Error
+	err := db.Order("`group`, `order`").Find(&out).Error
 
 	return out, resource.Pagination{}, err
 }

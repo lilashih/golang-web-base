@@ -27,8 +27,8 @@ func TestUserAPI(t *testing.T) {
 	List(t, r, "users", "users", true, resource.Users{}, model.UserInput{}, model.User{})
 
 	// 測試編輯，用新增拿到的id
-	code1 = time.Now().Unix()
-	input1 = fmt.Sprintf(`{"name":"name_%d"}`, code1)
+	code3 := time.Now().Unix()
+	input1 = fmt.Sprintf(`{"name":"name_%d"}`, code3)
 	Update(t, r, "users", "user", id1, input1, resource.User{}, model.UserInput{}, model.User{})
 
 	// 測試更新排序

@@ -45,6 +45,7 @@ go run main.go migrate
     ```
     swag init
     ```
+3. 在非 `release` 模式下才能開啟開啟 `/swagger/index.html`
 
 
 ## ▍測試

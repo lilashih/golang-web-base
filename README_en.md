@@ -45,6 +45,7 @@ go run main.go migrate
     ```
     swag init
     ```
+3. Only allow access to `/swagger/index.html` when not in `release` mode.
 
 
 ## ▍Testing

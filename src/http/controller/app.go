@@ -29,7 +29,6 @@ func (ctrl *AppController) RegisterRoutes(r *gin.RouterGroup) {
 // @Produce  json
 // @Success 200 {object} response.Response{data=resource.Configs} "code:200"
 func (ctrl *AppController) AppIndex(c *gin.Context) {
-
 	configs := map[string]string{
 		"version": config.App.Version,
 		"mode":    config.App.Mode,
