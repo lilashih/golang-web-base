@@ -3,9 +3,6 @@ const template =/*html*/`
       <el-header>
         <h1>Home</h1>
       </el-header>
-      <el-main class="content">
-      
-      </el-main>
 </el-container>
 `
 

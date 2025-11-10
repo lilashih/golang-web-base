@@ -119,7 +119,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/settings/{group}": {
+        "/settings/groups/{group}": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -240,6 +240,55 @@ const docTemplate = `{
                                     }
                                 }
                             ]
+                        }
+                    }
+                }
+            }
+        },
+        "/settings/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Setting 設定"
+                ],
+                "summary": "獲取設定資訊",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "設定ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "code:200",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/SettingsResource"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "code:404, message:查無該資料",
+                        "schema": {
+                            "$ref": "#/definitions/Response"
                         }
                     }
                 }
@@ -596,30 +645,10 @@ const docTemplate = `{
                 }
             }
         },
-        "ErrorBag": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "description": "錯誤訊息",
-                    "type": "string",
-                    "example": "為必填欄位"
-                },
-                "name": {
-                    "description": "錯誤欄位名稱",
-                    "type": "string",
-                    "example": "code"
-                }
-            }
-        },
         "ErrorValidationResource": {
             "type": "object",
             "properties": {
-                "errors": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ErrorBag"
-                    }
-                }
+                "errors": {}
             }
         },
         "Menu": {
@@ -767,7 +796,11 @@ const docTemplate = `{
                 },
                 "value": {
                     "description": "設定值",
-                    "type": "string"
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/model.JsonString"
+                        }
+                    ]
                 }
             }
         },
@@ -861,6 +894,12 @@ const docTemplate = `{
                 }
             }
         },
+        "model.JsonString": {
+            "type": "object",
+            "properties": {
+                "raw": {}
+            }
+        },
         "model.SettingInput": {
             "type": "object",
             "required": [
@@ -874,8 +913,11 @@ const docTemplate = `{
                 },
                 "value": {
                     "description": "設定值",
-                    "type": "string",
-                    "example": "192.1.1.1"
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/model.JsonString"
+                        }
+                    ]
                 }
             }
         },

@@ -23,5 +23,12 @@ func (r SettingResource) Collection(pagination Pagination, data interface{}) int
 }
 
 func (r SettingResource) Single(data interface{}) interface{} {
-	return nil
+	switch v := data.(type) {
+	case model.Setting:
+		return Setting{Setting: v}
+	case *model.Setting:
+		return Setting{Setting: *v}
+	default:
+		return data
+	}
 }

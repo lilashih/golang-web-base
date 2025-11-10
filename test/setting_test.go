@@ -18,5 +18,5 @@ func TestSettingApi(t *testing.T) {
 	// 測試編輯
 	code := time.Now().Unix()
 	input := fmt.Sprintf(`[{"id":"ip", "value":"測試_%d"}]`, code)
-	Update(t, r, "settings", "", "system", input, nil, nil)
+	Update(t, r, "settings/groups", "", "system", input, nil, nil)
 }

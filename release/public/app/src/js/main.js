@@ -1,5 +1,6 @@
 import menu from "./menu/menu.js";
 import Dashboard from "../view/Dashboard.js";
+import config from "./config/config.js";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -26,7 +27,7 @@ const app = createApp({
         $route: {
             immediate: true,
             handler(to, from) {
-                document.title = to.meta.header || 'Dashboard';
+                document.title = to.meta.header || config.name;
             }
         },
     },

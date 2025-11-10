@@ -19,8 +19,8 @@ var InsertPermission = migrate.MigrateSql{
 		}
 
 		items := []model.Permission{
-			newPermission("settingSystem", "app", "菜單", "設定", 1, "系統設定", "settings/system", "", true),
-			newPermission("settingAppearance", "app", "菜單", "設定", 2, "外觀設定", "settings/appearance", "", true),
+			newPermission("settingSystem", "app", "菜單", "設定", 1, "系統設定", "settings/groups/system", "", true),
+			newPermission("settingAppearance", "app", "菜單", "設定", 2, "外觀設定", "settings/groups/appearance", "", true),
 
 			newPermission("user", "app", "菜單", "項目設定", 1, "使用者", "users", "", true),
 		}

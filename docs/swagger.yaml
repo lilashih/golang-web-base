@@ -6,23 +6,9 @@ definitions:
           type: string
         type: object
     type: object
-  ErrorBag:
-    properties:
-      message:
-        description: 錯誤訊息
-        example: 為必填欄位
-        type: string
-      name:
-        description: 錯誤欄位名稱
-        example: code
-        type: string
-    type: object
   ErrorValidationResource:
     properties:
-      errors:
-        items:
-          $ref: '#/definitions/ErrorBag'
-        type: array
+      errors: {}
     type: object
   Menu:
     properties:
@@ -128,8 +114,9 @@ definitions:
         description: 編輯時間
         type: string
       value:
+        allOf:
+        - $ref: '#/definitions/model.JsonString'
         description: 設定值
-        type: string
     type: object
   SettingResource:
     properties:
@@ -193,6 +180,10 @@ definitions:
           $ref: '#/definitions/User'
         type: array
     type: object
+  model.JsonString:
+    properties:
+      raw: {}
+    type: object
   model.SettingInput:
     properties:
       id:
@@ -200,9 +191,9 @@ definitions:
         example: ip
         type: string
       value:
+        allOf:
+        - $ref: '#/definitions/model.JsonString'
         description: 設定值
-        example: 192.1.1.1
-        type: string
     required:
     - id
     type: object
@@ -275,7 +266,36 @@ paths:
       summary: 獲取設定
       tags:
       - Setting 設定
-  /settings/{group}:
+  /settings/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 設定ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: code:200
+          schema:
+            allOf:
+            - $ref: '#/definitions/Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/SettingsResource'
+              type: object
+        "404":
+          description: code:404, message:查無該資料
+          schema:
+            $ref: '#/definitions/Response'
+      summary: 獲取設定資訊
+      tags:
+      - Setting 設定
+  /settings/groups/{group}:
     get:
       consumes:
       - application/json

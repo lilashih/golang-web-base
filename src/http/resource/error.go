@@ -1,7 +1,5 @@
 package resource
 
-import "gbase/src/core/http/request"
-
 type ErrorValidation struct {
-	Errors []request.ErrorBag `json:"errors"`
+	Errors any `json:"errors"`
 } //@name ErrorValidationResource

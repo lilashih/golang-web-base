@@ -44,14 +44,6 @@ func (r SettingRepository) FindAll(search map[string]string) (interface{}, resou
 	return out, resource.Pagination{}, err
 }
 
-func (r SettingRepository) Find(key any) (interface{}, error) {
-	return nil, nil
-}
-
-func (r SettingRepository) Create(data model.IModel) (model.IModel, error) {
-	return nil, nil
-}
-
 func (r SettingRepository) UpdateSettings(inputs model.SettingInputs, group string) error {
 	db := r.NewModel().DB().Session(&gorm.Session{})
 
@@ -78,6 +70,16 @@ func (r SettingRepository) UpdateSettings(inputs model.SettingInputs, group stri
 	}
 
 	return nil
+}
+
+func (r SettingRepository) Find(key any) (interface{}, error) {
+	result := r.NewModel()
+	err := FindHelper(r.model, key, &result)
+	return result, err
+}
+
+func (r SettingRepository) Create(data model.IModel) (model.IModel, error) {
+	return nil, nil
 }
 
 func (r SettingRepository) Update(data model.IModel, key any) (model.IModel, error) {

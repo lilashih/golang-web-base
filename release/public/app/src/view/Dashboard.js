@@ -1,3 +1,5 @@
+import config from "../js/config/config.js";
+
 const template = /*html*/ `
 <el-container class="h-lvh">
 
@@ -9,7 +11,7 @@ const template = /*html*/ `
         <el-menu-item class="menu-collapse">
           <el-icon v-show="isCollapse" @click="setCollapse(false)"><ArrowRight /></el-icon>
           <el-icon v-show="!isCollapse" @click="setCollapse(true)"><ArrowLeft /></el-icon>
-          <span>Dashboard</span>
+          <span>{{ name }}</span>
         </el-menu-item>
 
         <template v-for="(menu, index) in menus" :key="index">
@@ -51,8 +53,10 @@ export default {
         const isCollapse = ref(false);
         const getIndex = (index1, index2 = -1) => `${index1}_${index2}`;
         const setCollapse = (isCollapseNew) => isCollapse.value = isCollapseNew
+        const name = ref(config.name);
 
         return {
+            name,
             isCollapse,
             getIndex,
             setCollapse,

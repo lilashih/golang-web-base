@@ -26,7 +26,7 @@ This project is a `Golang` web application based on `Gin`, including both fronte
 - Enable hot reload (Air)
     1. Install [Air](https://github.com/cosmtrek/air)
         ```
-        go install github.com/cosmtrek/air@latest
+        go install github.com/air-verse/air@latest
         ```
     2. Start hot reload
         ```

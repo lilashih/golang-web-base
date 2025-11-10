@@ -8,6 +8,7 @@ import (
 
 	"gbase/src/core/helper"
 	"gbase/src/core/migrate"
+	core "gbase/src/core/model"
 	"gbase/src/model"
 )
 
@@ -30,7 +31,7 @@ var InsertSetting = migrate.MigrateSql{
 	},
 }
 
-func newSetting(id, group, name, typ string, order int, option any, value string) model.Setting {
+func newSetting(id, group, name, typ string, order int, option any, value any) model.Setting {
 	return model.Setting{
 		Model: model.Model{
 			Order: order,
@@ -40,7 +41,7 @@ func newSetting(id, group, name, typ string, order int, option any, value string
 		Group:      group,
 		Type:       typ,
 		Option:     option,
-		Value:      value,
+		Value:      core.JsonString{Raw: value},
 		IsEditable: true,
 		IsViewable: true,
 	}

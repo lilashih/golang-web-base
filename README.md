@@ -26,7 +26,7 @@
 - 啟用熱加載（Air）
     1. 安裝 [Air](https://github.com/cosmtrek/air)  
         ```
-        go install github.com/cosmtrek/air@latest
+        go install github.com/air-verse/air@latest
         ```
     2. 執行熱加載
         ```

@@ -68,16 +68,23 @@ export default {
                     err.message = this.isEmpty(err.message) ? err.exception : err.message;
                     notify.error(err.message);
                 } else {
-                    err.data.errors = err.data.errors.reduce((acc, curr) => {
-                        acc[curr.name] = curr.message;
-                        return acc;
-                    }, {});
+                    if (Array.isArray(err.data.errors)) {
+                        err.data.errors = this.flattenErrors(err.data.errors);
+                    }
                 }
                 throw err;
             })
             .finally(function () {
                 loading.hide();
             });
+    },
+
+    flattenErrors: (errors) => {
+        errors = errors.reduce((acc, curr) => {
+            acc[curr.name] = curr.message;
+            return acc;
+        }, {});
+        return errors;
     },
 
     // 檢查是否為空
