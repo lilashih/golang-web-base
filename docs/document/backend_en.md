@@ -123,7 +123,8 @@ logger.Migrate.Println("Applying migrations...")
 |-----------|-----------|-----------|
 | `/static` | `<PublicPath>/static` | |
 | `/src` | `<PublicPath>/app/src` | |
-| `/` | `<PublicPath>/app/index.html` | SPA entry. Any route starting with `/` that is not `/src/` or `/static/` is served `index.html` for client-side handling. |
+| `/app` | `<PublicPath>/app/index.html` | SPA entry point. Any route that starts with `/app` will serve `index.html` for client-side routing. |
+| `/` |  | Redirects to `/app`。 |
 
 - `PublicPath` is set by `config.App.PublicPath`.
 

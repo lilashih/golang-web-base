@@ -7,6 +7,7 @@ import (
 	"gbase/src/http/controller"
 	"log"
 	"path/filepath"
+	"strings"
 
 	docs "gbase/docs"
 
@@ -42,9 +43,14 @@ func SetupRouter() *gin.Engine {
 
 	// router.Use(middleware.AccessLog())
 
-	// 前端SPA頁面：所有 / 開頭的都回傳 index.html (但避免 src 衝突)
+	// 前端SPA頁面：只有前綴是 app/ 的進入 index.html
 	router.NoRoute(func(c *gin.Context) {
-		c.File(filepath.Join(config.App.PublicPath, "app", "index.html"))
+		if strings.HasPrefix(c.Request.URL.Path, "/app") {
+			c.File(filepath.Join(config.App.PublicPath, "app", "index.html"))
+		}
+	})
+	router.GET("/", func(c *gin.Context) {
+		c.Redirect(302, "/app")
 	})
 
 	// 靜態資源

@@ -131,7 +131,8 @@ logger.Migrate.Println("Applying migrations...")
 |-----------|-----------|-----------|
 | `/static` | `<PublicPath>/static` | |
 | `/src` | `<PublicPath>/app/src` | |
-| `/` | `<PublicPath>/app/index.html` | `SPA` 頁面，`/` 開頭且非 `/src/`、`/static/` 的路由，會傳給 `index.html` 交由前端處理。 |
+| `/app` | `<PublicPath>/app/index.html` | `SPA` 頁面，`/app` 前綴的路由會傳給 `index.html` 交由前端處理。 |
+| `/` |  | 導向 `/app`。 |
   - `PublicPath` 的值由 `config.App.PublicPath` 決定。
 
 ### API 註冊範例  

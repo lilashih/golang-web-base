@@ -89,6 +89,7 @@ definitions:
     properties:
       createdAt:
         description: 新增時間
+        example: "2025-01-01 23:01:01"
         type: string
       group:
         description: 群組
@@ -112,11 +113,14 @@ definitions:
         type: string
       updatedAt:
         description: 編輯時間
+        example: "2025-01-01 23:01:01"
         type: string
       value:
         allOf:
         - $ref: '#/definitions/model.JsonString'
         description: 設定值
+    type: object
+  SettingInputs:
     type: object
   SettingResource:
     properties:
@@ -134,6 +138,7 @@ definitions:
     properties:
       createdAt:
         description: 新增時間
+        example: "2025-01-01 23:01:01"
         type: string
       id:
         description: ID
@@ -152,6 +157,7 @@ definitions:
         type: integer
       updatedAt:
         description: 編輯時間
+        example: "2025-01-01 23:01:01"
         type: string
     required:
     - name
@@ -183,19 +189,6 @@ definitions:
   model.JsonString:
     properties:
       raw: {}
-    type: object
-  model.SettingInput:
-    properties:
-      id:
-        description: 設定ID
-        example: ip
-        type: string
-      value:
-        allOf:
-        - $ref: '#/definitions/model.JsonString'
-        description: 設定值
-    required:
-    - id
     type: object
   resource.Menus:
     properties:
@@ -334,9 +327,7 @@ paths:
         name: data
         required: true
         schema:
-          items:
-            $ref: '#/definitions/model.SettingInput'
-          type: array
+          $ref: '#/definitions/SettingInputs'
       produces:
       - application/json
       responses:

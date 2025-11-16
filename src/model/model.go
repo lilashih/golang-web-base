@@ -53,8 +53,8 @@ func (m *Model) GetOrder() int {
  */
 
 type TimestampModel struct {
-	CreatedAt string `gorm:"column:createdAt" json:"createdAt"` // 新增時間
-	UpdatedAt string `gorm:"column:updatedAt" json:"updatedAt"` // 編輯時間
+	CreatedAt string `gorm:"column:createdAt" json:"createdAt" example:"2025-01-01 23:01:01"` // 新增時間
+	UpdatedAt string `gorm:"column:updatedAt" json:"updatedAt" example:"2025-01-01 23:01:01"` // 編輯時間
 }
 
 func (m *TimestampModel) BeforeCreate(tx *gorm.DB) (err error) {

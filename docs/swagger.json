@@ -175,10 +175,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.SettingInput"
-                            }
+                            "$ref": "#/definitions/SettingInputs"
                         }
                     }
                 ],
@@ -749,7 +746,8 @@
             "properties": {
                 "createdAt": {
                     "description": "新增時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 },
                 "group": {
                     "description": "群組",
@@ -781,7 +779,8 @@
                 },
                 "updatedAt": {
                     "description": "編輯時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 },
                 "value": {
                     "description": "設定值",
@@ -792,6 +791,9 @@
                     ]
                 }
             }
+        },
+        "SettingInputs": {
+            "type": "object"
         },
         "SettingResource": {
             "type": "object",
@@ -820,7 +822,8 @@
             "properties": {
                 "createdAt": {
                     "description": "新增時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 },
                 "id": {
                     "description": "ID",
@@ -843,7 +846,8 @@
                 },
                 "updatedAt": {
                     "description": "編輯時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 }
             }
         },
@@ -887,27 +891,6 @@
             "type": "object",
             "properties": {
                 "raw": {}
-            }
-        },
-        "model.SettingInput": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "設定ID",
-                    "type": "string",
-                    "example": "ip"
-                },
-                "value": {
-                    "description": "設定值",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/model.JsonString"
-                        }
-                    ]
-                }
             }
         },
         "resource.Menus": {

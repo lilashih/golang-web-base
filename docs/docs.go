@@ -186,10 +186,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.SettingInput"
-                            }
+                            "$ref": "#/definitions/SettingInputs"
                         }
                     }
                 ],
@@ -760,7 +757,8 @@ const docTemplate = `{
             "properties": {
                 "createdAt": {
                     "description": "新增時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 },
                 "group": {
                     "description": "群組",
@@ -792,7 +790,8 @@ const docTemplate = `{
                 },
                 "updatedAt": {
                     "description": "編輯時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 },
                 "value": {
                     "description": "設定值",
@@ -803,6 +802,9 @@ const docTemplate = `{
                     ]
                 }
             }
+        },
+        "SettingInputs": {
+            "type": "object"
         },
         "SettingResource": {
             "type": "object",
@@ -831,7 +833,8 @@ const docTemplate = `{
             "properties": {
                 "createdAt": {
                     "description": "新增時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 },
                 "id": {
                     "description": "ID",
@@ -854,7 +857,8 @@ const docTemplate = `{
                 },
                 "updatedAt": {
                     "description": "編輯時間",
-                    "type": "string"
+                    "type": "string",
+                    "example": "2025-01-01 23:01:01"
                 }
             }
         },
@@ -898,27 +902,6 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "raw": {}
-            }
-        },
-        "model.SettingInput": {
-            "type": "object",
-            "required": [
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "description": "設定ID",
-                    "type": "string",
-                    "example": "ip"
-                },
-                "value": {
-                    "description": "設定值",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/model.JsonString"
-                        }
-                    ]
-                }
             }
         },
         "resource.Menus": {

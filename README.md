@@ -23,7 +23,7 @@
     go run main.go
     ```
 
-- 啟用熱加載（Air）
+- 啟用熱加載
     1. 安裝 [Air](https://github.com/cosmtrek/air)  
         ```
         go install github.com/air-verse/air@latest
